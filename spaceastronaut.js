@@ -66,7 +66,7 @@ window.onload = function() {
     planet2Img.src = "Planet - 2.png"
 
     planet3Img = new Image ();
-    planet3Img.src = "img/Planet - 3.png"
+    planet3Img.src = "Planet - 3.png"
    
     requestAnimationFrame(update);
     setInterval(placePlanet, 1000); //1000 milliseconds = 1 second
