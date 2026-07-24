@@ -53,20 +53,20 @@ window.onload = function() {
     // context.fillRect(astronaut.x, astronaut.y, astronaut.width, astronaut.height);
 
     astronautImg = new Image ()
-    astronautImg.src = "./img/Astronaut Sprite 86x86.png";
+    astronautImg.src = "Astronaut Sprite 86x86.png";
     astronautImg.onload = function() {
         context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
     }
 
         
     planet1Img = new Image ();
-    planet1Img.src = "./img/Planet - 1.png"
+    planet1Img.src = "Planet - 1.png"
     
     planet2Img = new Image ();
-    planet2Img.src = "./img/Planet - 2.png"
+    planet2Img.src = "Planet - 2.png"
 
     planet3Img = new Image ();
-    planet3Img.src = "./img/Planet - 3.png"
+    planet3Img.src = "img/Planet - 3.png"
    
     requestAnimationFrame(update);
     setInterval(placePlanet, 1000); //1000 milliseconds = 1 second
