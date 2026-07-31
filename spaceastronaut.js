@@ -109,12 +109,10 @@ function update() {
 
         if (detectCollision(astronaut, planet)) {
             gameOver = true;
-            
-            
             context.fillStyle = "black";
             context.font = "bold 40px 'Courier New', Courier, monospace";
             context.textAlign = "center";
-            context.fillText("GAME OVER", board.width / 2, board.height / 2);
+            context.fillText("GAME OVER", 750 / 2, 250 / 2);
         }
         }
     context.fillStyle = "black";
