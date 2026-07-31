@@ -2,14 +2,31 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport", content="width=device-width, intial-scale=1.0">
+        <meta name="viewport", content="width=device-width, initial-scale=1.0">
         <title>Don't Let the Alien Catch Ya!</title>
         <link rel="stylesheet" href="spaceastronaut.css">
     </head>
     <body>
-        <h1> Don't Let the Alien Catch Ya!</h1>
+        <body>
+    <div id="start-menu">
+        <h1>Don't Let the Alien Catch Ya!</h1>
+        <p>Take your astronaut through deep space, dodge planets, and survive. Reach a score of 1750 to succeed, and careful, DON'T touch the planets :)</p>
+        <div class="game-instructions">
+            <h2>How to Play</h2>
+            <p>Press the <strong>Spacebar</strong> or <strong>Up Arrow</strong> to jump.</p>
+        </div>
+        <button id="start-btn">Start Game</button>
+    </div>
+    <div id="game-container" style="display: none;">
+        <h1>Don't Let the Alien Catch Ya!</h1>
         <canvas id="board"></canvas>
-       
-        <script src="spaceastronaut.js"></script>
-    </body>
+        <div class="controls-container" style="text-align: center; margin-top: 15px;">
+    <button id="restart-btn">Restart Game</button>
+</div>
+    <footer style="margin-top: 45px; margin-bottom: 25px; color: #ffffff; background-color: rgba(20, 15, 35, 0.85); padding: 15px; border-radius: 8px; border: 1px solid #422b93; font-family: 'Courier New', monospace; font-size: 13px; text-align: center; line-height: 1.6; max-width: 750px; margin-left: auto; margin-right: auto;">
+    <p> <strong>Game Project built by:</strong> Brambaifa Miriki </p>
+    <p> <strong>Asset Credits:</strong> Cosmic pixel art backdrops and stellar planet sprites sourced from itch.io </p>
+</footer>
+<script src="spaceastronaut.js"></script>
+</body>
 </html>

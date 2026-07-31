@@ -1,11 +1,54 @@
 body {
     font-family:'Courier New', Courier, monospace;
     text-align: center;
+    background-image: url('img/c0da8de5-30b3-4962-bad2-e667e32a6a5e.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
 }
-
 #board {
-    background-color: lightgray;
-    border-bottom: 1px solid black;
+    border: 3px solid #303144;
+    border-radius: 8px;
     width: 750px;
     height: 250px;
+    margin: 20px auto;
+    background-color: #94468e;
+}
+#start-menu {
+    background-color: rgba(48, 49, 68, 0.95);
+    border: 3px solid #303144;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    color: white;
+}
+#start-btn, #restart-btn {
+    background-color: #b5cb76; 
+    color: #303144;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+#start-btn:hover, #restart-btn:hover {
+    background-color: #9cb15c; 
+}
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#restart-btn {
+    display: block;
+    margin: 20px auto 0 auto; 
 }
