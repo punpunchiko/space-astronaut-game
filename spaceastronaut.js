@@ -106,7 +106,7 @@ function update() {
         let planet = planetArray[i];
         planet.x += velocityX;
         context.drawImage(planet.img, planet.x, planet.y, planet.width, planet.height);
-
+    }
         if (detectCollision(astronaut, planet)) {
             gameOver = true;
             let gameOverImg = new Image();
