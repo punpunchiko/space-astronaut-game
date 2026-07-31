@@ -161,16 +161,19 @@ function placePlanet() {
     if (placePlanetChance > .90) { 
         planet.img = planet3Img;
         planet.width = planet3Width;
+        planet.height = 90;
         planetArray.push(planet);
     }
     else if (placePlanetChance > .70) { 
         planet.img = planet2Img;
         planet.width = planet2Width;
+        planet.height = 65;
         planetArray.push(planet);
     }
     else if (placePlanetChance > .50) { 
         planet.img = planet1Img;
         planet.width = planet1Width;
+        planet.height = 34;
         planetArray.push(planet);
     }
 
