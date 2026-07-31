@@ -3,7 +3,6 @@ let boardWidth = 750;
 let boardHeight = 250;
 let context;
 
-// Astronaut settings
 let astronautWidth = 88;
 let astronautHeight = 94;
 let astronautX = 50;
@@ -17,12 +16,11 @@ let astronaut = {
     height : astronautHeight
 }
 
-// Planet configurations
 let planetArray = [];
 
-let planet1Width = 34;
-let planet2Width = 69;
-let planet3Width = 102;
+let planet1Width = 70;
+let planet2Width = 70;
+let planet3Width = 70;
 
 let planetHeight = 70;
 let planetX = 700;
@@ -32,7 +30,6 @@ let planet1Img;
 let planet2Img;
 let planet3Img;
 
-// Game Physics and Tracking Properties
 let velocityX = -8; 
 let velocityY = 0;
 let gravity = .4;
@@ -47,24 +44,35 @@ window.onload = function() {
     board.width = boardWidth;
     context = board.getContext("2d"); 
 
-    // Load initial astronaut character graphic asset
+   // Load initial astronaut character graphic asset
+    astronautImg = new Image();
+    // FIXED PATH: Removed folder directory prefix!
+    astronautImg.src = "Astronaut Sprite 86x86.png"; 
+    astronautImg.onload = function() {
+            context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
+       } 
+   
+     // 1. Load astronaut asset with dual-path safety net
     astronautImg = new Image();
     astronautImg.src = "Astronaut Sprite 86x86.png";
+    astronautImg.onerror = function() { astronautImg.src = "img/Astronaut Sprite 86x86.png"; };
     astronautImg.onload = function() {
         context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
     }
 
-    // Initialize planet obstacle images
+    // 2. Load planet obstacle images with dual-path safety nets
     planet1Img = new Image();
     planet1Img.src = "Planet - 1.png";
+    planet1Img.onerror = function() { planet1Img.src = "img/Planet - 1.png"; };
 
     planet2Img = new Image();
     planet2Img.src = "Planet - 2.png";
+    planet2Img.onerror = function() { planet2Img.src = "img/Planet - 2.png"; };
 
     planet3Img = new Image();
     planet3Img.src = "Planet - 3.png";
-
-    // SAFELY FETCH UI ELEMENTS INSIDE WINDOW.ONLOAD
+    planet3Img.onerror = function() { planet3Img.src = "img/Planet - 3.png"; };
+            
     let startBtn = document.getElementById("start-btn");
     let startMenu = document.getElementById("start-menu");
     let gameContainer = document.getElementById("game-container");
@@ -73,17 +81,16 @@ window.onload = function() {
         if (!gameStarted) {
             startMenu.style.display = "none";
             gameContainer.style.display = "block";
-            
+                
             gameStarted = true;
             gameOver = false;
-            
-            requestAnimationFrame(update);
-            setInterval(placePlanet, 1000); 
-            document.addEventListener("keydown", moveAstronaut);
-        }
-    });
-}
-
+                
+                requestAnimationFrame(update);
+                setInterval(placePlanet, 1000); 
+                document.addEventListener("keydown", moveAstronaut);
+            }
+        });
+    }
 function update() {
     requestAnimationFrame(update);
     if (gameOver) {
@@ -103,7 +110,7 @@ function update() {
         if (detectCollision(astronaut, planet)) {
             gameOver = true;
             let gameOverImg = new Image();
-            gameOverImg.src = "-Pngtree-game over screen sign with_5995257.png";
+            gameOverImg.src = "./img/-Pngtree-game over screen sign with_5995257.png";
             gameOverImg.onload = function() {
                 context.drawImage(gameOverImg, boardWidth/2 - 150, boardHeight/2 - 50, 300, 100);
             }
@@ -113,17 +120,16 @@ function update() {
     context.fillStyle = "black";
     context.font = "20px courier";
     score++;
-    context.fillText(score, 20, 35);
+    context.fillText(score, 20, 23);
     
-    // WIN STATE CHECK: Triggers victory screen at exactly 1750 points
     if (score >= 1750) {
         gameOver = true;
-        context.fillStyle = "rgba(18, 14, 46, 0.85)";
+        context.fillStyle = "rgba(18, 14, 46, 0.9)";
         context.fillRect(0, 0, board.width, board.height);
         context.fillStyle = "#ffd700";
         context.font = "bold 32px 'Courier New'";
         context.textAlign = "center";
-        context.fillText("VICTORY! YOU SURVIVED!", board.width / 2, board.height / 2);
+        context.fillText("HAZAH! VICTORY AT LAST!", board.width / 2, board.height / 2);
         return;
     }
 }
