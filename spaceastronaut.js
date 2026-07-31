@@ -109,15 +109,14 @@ function update() {
 
         if (detectCollision(astronaut, planet)) {
             gameOver = true;
-            let gameOverImg = new Image();
-            gameOverImg.src = "-Pngtree-game over screen sign with_5995257.png";
-            gameOverImg.onerror = function() { gameOverImg.src = "img/-Pngtree-game over screen sign with_5995257.png"; };
-            gameOverImg.onload = function() {
-                context.drawImage(gameOverImg, boardWidth/2 - 150, boardHeight/2 - 50, 300, 100);
-            }
+            
+            
+            context.fillStyle = "black";
+            context.font = "bold 40px 'Courier New', Courier, monospace";
+            context.textAlign = "center";
+            context.fillText("GAME OVER", board.width / 2, board.height / 2);
         }
-    }
-
+        }
     context.fillStyle = "black";
     context.font = "20px courier";
     score++;
