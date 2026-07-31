@@ -5,11 +5,8 @@ body {
     background-size: auto;
     background-repeat: repeat;
     background-attachment: fixed;
-        background-image: url('c0da8de5-30b3-4962-bad2-e667e32a6a5e.jpg'),
-                      url('c0da8de5-30b3-4962-bad2-e667e32a6a5e.JPG'),
-                      url('c0da8de5-30b3-4962-bad2-e667e32a6a5e.png'),
-                      url('c0da8de5-30b3-4962-bad2-e667e32a6a5e.PNG');
-}
+    background-image: url("img/c0da8de5-30b3-4962-bad2-e667e32a6a5e.jpg"),
+                      url("c0da8de5-30b3-4962-bad2-e667e32a6a5e.jpg");
 }
 #board {
     border: 3px solid #303144;
