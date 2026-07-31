@@ -49,10 +49,10 @@ window.onload = function() {
     // FIXED PATH: Removed folder directory prefix!
     astronautImg.src = "Astronaut Sprite 86x86.png"; 
     astronautImg.onload = function() {
-        context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
-    }
-
-    // Initialize planet obstacle images
+            context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
+       } 
+   
+        // Initialize planet obstacle images
     // FIXED PATHS: Removed folder directory prefixes!
     planet1Img = new Image();
     planet1Img.src = "Planet - 1.png";
