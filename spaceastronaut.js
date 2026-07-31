@@ -18,9 +18,9 @@ let astronaut = {
 
 let planetArray = [];
 
-let planet1Width = 70;
-let planet2Width = 70;
-let planet3Width = 70;
+let planet1Width = 34;
+let planet2Width = 65;
+let planet3Width = 90;
 
 let planetHeight = 70;
 let planetX = 700;
