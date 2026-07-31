@@ -109,10 +109,6 @@ function update() {
 
         if (detectCollision(astronaut, planet)) {
             gameOver = true;
-            context.fillStyle = "black";
-            context.font = "bold 40px 'Courier New', Courier, monospace";
-            context.textAlign = "center";
-            context.fillText("GAME OVER", 750 / 2, 250 / 2);
         }
         }
     context.fillStyle = "black";
@@ -130,14 +126,12 @@ function update() {
         context.fillText("VICTORY! YOU SURVIVED!", board.width / 2, board.height / 2);
         return;
     }
-}
 
-function moveAstronaut(e) {
-    if (gameOver) {
-        return;
-    }
-    if ((e.code == "Space" || e.code == "ArrowUp") && astronaut.y == astronautY) {
-        velocityY = -10; 
+    if (gameOver && score < 1750) {
+        context.fillStyle = "black";
+        context.font = "bold 40px 'Courier New', Courier, monospace";
+        context.textAlign = "center";
+        context.fillText("GAME OVER", 750 / 2, 250 / 2);
     }
 }
 
