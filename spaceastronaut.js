@@ -23,9 +23,9 @@ let planet1Img;
 let planet2Img;
 let planet3Img;
 
-let velocityX = -8; 
+let velocityX = -4.5; 
 let velocityY = 0;
-let gravity = .4;
+let gravity = .25;
 
 let gameOver = false;
 let gameStarted = false;
@@ -72,7 +72,7 @@ window.onload = function() {
                 gameOver = false;
                 
                 requestAnimationFrame(update);
-                setInterval(placePlanet, 1000); 
+                setInterval(placePlanet, 1800); 
                 document.addEventListener("keydown", moveAstronaut);
             }
         });
@@ -84,7 +84,7 @@ window.onload = function() {
                 gameStarted = true;
                 gameOver = false;
                 requestAnimationFrame(update);
-                setInterval(placePlanet, 1000); 
+                setInterval(placePlanet, 1800); 
                 document.addEventListener("keydown", moveAstronaut);
             }
         });
@@ -193,4 +193,12 @@ if (resetBtn) {
         velocityY = 0;
         planetArray = [];
     });
+}
+function moveAstronaut(e) {
+    if (gameOver) {
+        return;
+    }
+    if ((e.code == "Space" || e.code == "ArrowUp") && astronaut.y == astronautY) {
+        velocityY = -10; 
+    }
 }
