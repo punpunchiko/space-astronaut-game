@@ -52,7 +52,7 @@ window.onload = function() {
             context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
        } 
    
-     // 1. Load astronaut asset with dual-path safety net
+    
     astronautImg = new Image();
     astronautImg.src = "Astronaut Sprite 86x86.png";
     astronautImg.onerror = function() { astronautImg.src = "img/Astronaut Sprite 86x86.png"; };
@@ -60,7 +60,7 @@ window.onload = function() {
         context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
     }
 
-    // 2. Load planet obstacle images with dual-path safety nets
+    
     planet1Img = new Image();
     planet1Img.src = "Planet - 1.png";
     planet1Img.onerror = function() { planet1Img.src = "img/Planet - 1.png"; };
@@ -151,34 +151,33 @@ function placePlanet() {
      let planet = {
             img : null,
             x : planetX,
-            y : null,      // CHANGED THIS TO NULL
+            y : null,      
             width : null,
-            height : null  // CHANGED THIS TO NULL
+            height : null  
         }
-
     let placePlanetChance = Math.random(); 
 
     if (placePlanetChance > .90) { 
-        planet.img = planet3Img;
-        planet.width = planet3Width;
-        planet.height = 90;
-        planet.y = boardHeight - 90;
-        planetArray.push(planet);
-    }
-    else if (placePlanetChance > .70) { 
-        planet.img = planet2Img;
-        planet.width = planet2Width;
-        planet.height = 65;
-        planet.y = boardHeight - 65;
-        planetArray.push(planet);
-    }
-    else if (placePlanetChance > .50) { 
-        planet.img = planet1Img;
-        planet.width = planet1Width;
-        planet.height = 34;
-        planet.y = boardHeight - 34;
-        planetArray.push(planet);
-    }
+            planet.img = planet3Img;
+            planet.width = 90;           
+            planet.height = 90;          
+            planet.y = boardHeight - 90; 
+            planetArray.push(planet);
+        }
+        else if (placePlanetChance > .70) { 
+            planet.img = planet2Img;
+            planet.width = 65;          
+            planet.height = 65;         
+            planet.y = boardHeight - 65; 
+            planetArray.push(planet);
+        }
+        else if (placePlanetChance > .50) { 
+            planet.img = planet1Img;
+            planet.width = 34;          
+            planet.height = 34;          
+            planet.y = boardHeight - 34; 
+            planetArray.push(planet);
+        }
 
     if (planetArray.length > 5) {
         planetArray.shift(); 
