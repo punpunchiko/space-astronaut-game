@@ -3,7 +3,7 @@ let boardWidth = 750;
 let boardHeight = 250;
 let context;
 
-// Astronaut settings
+// Astronaut configuration
 let astronautWidth = 88;
 let astronautHeight = 94;
 let astronautX = 50;
@@ -17,22 +17,15 @@ let astronaut = {
     height : astronautHeight
 }
 
-// Planet configurations
+// Planet configuration baseline units
 let planetArray = [];
-
-let planet1Width = 34;
-let planet2Width = 65;   
-let planet3Width = 90;   
-
-let planetHeight = 70;
 let planetX = 700;
-let planetY = 250 - 70; 
 
 let planet1Img;
 let planet2Img;
 let planet3Img;
 
-// Game Physics and Tracking Properties
+// Game Physics and State Tracking
 let velocityX = -8; 
 let velocityY = 0;
 let gravity = .4;
@@ -43,19 +36,21 @@ let score = 0;
 
 window.onload = function() {
     board = document.getElementById("board");
-    board.height = boardHeight;
-    board.width = boardWidth;
-    context = board.getContext("2d"); 
+    if (board) {
+        board.height = boardHeight;
+        board.width = boardWidth;
+        context = board.getContext("2d"); 
+    }
 
-    // Load initial astronaut character graphic asset
+    // Initialize character asset paths with cloud safety fallbacks
     astronautImg = new Image();
     astronautImg.src = "Astronaut Sprite 86x86.png";
     astronautImg.onerror = function() { astronautImg.src = "img/Astronaut Sprite 86x86.png"; };
     astronautImg.onload = function() {
-        context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
+        if (context) context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
     }
 
-    // Initialize planet obstacle images
+    // Initialize planet asset paths with cloud safety fallbacks
     planet1Img = new Image();
     planet1Img.src = "Planet - 1.png";
     planet1Img.onerror = function() { planet1Img.src = "img/Planet - 1.png"; };
@@ -68,37 +63,54 @@ window.onload = function() {
     planet3Img.src = "Planet - 3.png";
     planet3Img.onerror = function() { planet3Img.src = "img/Planet - 3.png"; };
 
-    // Fetch operational UI panels safely
+    // SAFE UI INTERFACING: Checks if elements exist before executing to prevent crashes
     let startBtn = document.getElementById("start-btn");
     let startMenu = document.getElementById("start-menu");
     let gameContainer = document.getElementById("game-container");
 
-    startBtn.addEventListener("click", function() {
-        if (!gameStarted) {
-            startMenu.style.display = "none";
-            gameContainer.style.display = "block";
-            
-            gameStarted = true;
-            gameOver = false;
-            
-            requestAnimationFrame(update);
-            setInterval(placePlanet, 1000); 
-            document.addEventListener("keydown", moveAstronaut);
-        }
-    });
+    if (startBtn) {
+        startBtn.addEventListener("click", function() {
+            if (!gameStarted) {
+                if (startMenu) startMenu.style.display = "none";
+                if (gameContainer) gameContainer.style.display = "block";
+                
+                gameStarted = true;
+                gameOver = false;
+                
+                requestAnimationFrame(update);
+                setInterval(placePlanet, 1000); 
+                document.addEventListener("keydown", moveAstronaut);
+            }
+        });
+    } else {
+        // ULTIMATE FALLBACK: If your HTML button ID is named differently, pressing Spacebar will still launch it!
+        document.addEventListener("keydown", function(e) {
+            if (e.code === "Space" && !gameStarted) {
+                if (startMenu) startMenu.style.display = "none";
+                if (gameContainer) gameContainer.style.display = "block";
+                gameStarted = true;
+                gameOver = false;
+                requestAnimationFrame(update);
+                setInterval(placePlanet, 1000); 
+                document.addEventListener("keydown", moveAstronaut);
+            }
+        });
+    }
 }
 
 function update() {
     requestAnimationFrame(update);
-    if (gameOver) {
+    if (gameOver || !context) {
         return;
     }
     context.clearRect(0, 0, board.width, board.height);
 
+    // Gravity calculation tracking mechanics
     velocityY += gravity;
     astronaut.y = Math.min(astronaut.y + velocityY, astronautY); 
     context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
 
+    // Process and render obstacle array vectors
     for (let i = 0; i < planetArray.length; i++) {
         let planet = planetArray[i];
         planet.x += velocityX;
@@ -115,12 +127,13 @@ function update() {
         }
     }
 
+    // Render operational score interface layout metrics
     context.fillStyle = "black";
     context.font = "20px courier";
     score++;
     context.fillText(score, 20, 35);
     
-    // WIN STATE CHECK: Victory condition triggers at exactly 1750 points
+    // WIN STATE CONDITION: Triggers custom canvas shield display at 1750 points
     if (score >= 1750) {
         gameOver = true;
         context.fillStyle = "rgba(18, 14, 46, 0.85)";
@@ -157,25 +170,26 @@ function placePlanet() {
 
     let placePlanetChance = Math.random(); 
 
+    // GEOMETRIC PROPORTIONS ACCURACY: Locks perfect width-height scaling ratios
     if (placePlanetChance > .90) { 
         planet.img = planet3Img;
         planet.width = 90;
         planet.height = 90;
-        planet.y = boardHeight - 90;
+        planet.y = boardHeight - 90; // Sets floor boundaries perfectly so bottom doesn't cut off
         planetArray.push(planet);
     }
     else if (placePlanetChance > .70) { 
         planet.img = planet2Img;
         planet.width = 65;
         planet.height = 65;
-        planet.y = boardHeight - 65;
+        planet.y = boardHeight - 65; // Sets floor boundaries perfectly so bottom doesn't cut off
         planetArray.push(planet);
     }
     else if (placePlanetChance > .50) { 
         planet.img = planet1Img;
         planet.width = 34;
         planet.height = 34;
-        planet.y = boardHeight - 34;
+        planet.y = boardHeight - 34; // Sets floor boundaries perfectly so bottom doesn't cut off
         planetArray.push(planet);
     }
 
@@ -191,10 +205,14 @@ function detectCollision(a, b) {
            a.y + a.height > b.y; 
 }
 
-document.getElementById('restart-btn').addEventListener('click', function() {
-    gameOver = false;
-    score = 0;
-    astronaut.y = boardHeight - astronautHeight;
-    velocityY = 0;
-    planetArray = [];
-});
+// Interactive Reset Trigger Hook Elements
+let resetBtn = document.getElementById('restart-btn');
+if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+        gameOver = false;
+        score = 0;
+        astronaut.y = boardHeight - astronautHeight;
+        velocityY = 0;
+        planetArray = [];
+    });
+}
