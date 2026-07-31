@@ -24,7 +24,7 @@ let planet3Width = 90;
 
 let planetHeight = 70;
 let planetX = 700;
-let planetY = boardHeight - planetHeight;
+let planetY = boardHeight - 70;
 
 let planet1Img;
 let planet2Img;
