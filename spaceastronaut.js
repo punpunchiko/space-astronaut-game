@@ -148,13 +148,13 @@ function placePlanet() {
         return;
     }
 
-    let planet = {
-        img : null,
-        x : planetX,
-        y : planetY,
-        width : null,
-        height : planetHeight
-    }
+     let planet = {
+            img : null,
+            x : planetX,
+            y : null,      // CHANGED THIS TO NULL
+            width : null,
+            height : null  // CHANGED THIS TO NULL
+        }
 
     let placePlanetChance = Math.random(); 
 
