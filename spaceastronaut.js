@@ -44,21 +44,24 @@ window.onload = function() {
     board.width = boardWidth;
     context = board.getContext("2d"); 
 
+   // Load initial astronaut character graphic asset
     astronautImg = new Image();
-    astronautImg.src = "./img/Astronaut Sprite 86x86.png";
+    // FIXED PATH: Removed folder directory prefix!
+    astronautImg.src = "Astronaut Sprite 86x86.png"; 
+    astronautImg.onload = function() {
+        context.drawImage(astronautImg, astronaut.x, astronaut.y, astronaut.width, astronaut.height);
+    }
 
+    // Initialize planet obstacle images
+    // FIXED PATHS: Removed folder directory prefixes!
     planet1Img = new Image();
-    planet1Img.src = "./img/Planet - 1.png";
+    planet1Img.src = "Planet - 1.png";
 
     planet2Img = new Image();
-    planet2Img.src = "./img/Planet - 2.png";
+    planet2Img.src = "Planet - 2.png";
 
     planet3Img = new Image();
-    planet3Img.src = "./img/Planet - 3.png";
-
-    let startBtn = document.getElementById("start-btn");
-    let startMenu = document.getElementById("start-menu");
-    let gameContainer = document.getElementById("game-container");
+    planet3Img.src = "Planet - 3.png";
 
     startBtn.addEventListener("click", function() {
         if (!gameStarted) {
